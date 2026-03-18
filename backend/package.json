@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "npm --prefix ../frontend start",
+    "concurrent": "concurrently \"npm run server\" \"npm run client\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

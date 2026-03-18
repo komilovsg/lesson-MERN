@@ -10,7 +10,8 @@ const postsRouter = require('./routes/api/posts');
 const profileRouter = require('./routes/api/profile');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+// macOS Control Center часто занимает 5000 (AirPlay/AirTunes), поэтому берём 5001 по умолчанию
+const PORT = process.env.PORT || 5001;
 
 // Connect Database
 connectDB();

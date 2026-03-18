@@ -9,7 +9,12 @@ module.exports = function (req, res, next) {
     return res.status(401).json({ msg: 'No token, authorization denied' });
   }
   try {
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
+    const jwtSecret = process.env.JWT_SECRET || (config.has('jwtSecret') ? config.get('jwtSecret') : null);
+    if (!jwtSecret) {
+      return res.status(500).json({ msg: 'Server misconfigured: missing JWT secret' });
+    }
+
+    const decoded = jwt.verify(token, jwtSecret);
     req.user = decoded.user;
     next();
   } catch (err) {
